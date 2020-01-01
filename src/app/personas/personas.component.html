@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-8">
+        <h1>Listado de Personas</h1>
+        <button (click)="onCrearPersona()" type="button" class="btn btn-primary btn-sm" [disabled]="!agregarPersona">Agregar Persona</button>
+      </div>
+    </div>
+    <br>
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <ng-container *ngIf="agregarPersonaStatus !== 'Esperando una accion'; then thenTemplate; else elseTemplate">
+        </ng-container>
+        <ng-template #thenTemplate>
+          <div class="alert alert-info" role="alert">
+            <strong>{{agregarPersonaStatus}} {{tituloPersona}}</strong>
+          </div>
+        </ng-template>
+        <ng-template #elseTemplate>
+          <div class="alert alert-warning" role="alert">
+            <strong>{{agregarPersonaStatus}} {{tituloPersona}}</strong>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <div class="form-horizontal">
+        <label for="Nombre Persona"></label>
+        <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId" placeholder="nombre" (input)="onModificarPersona($event)" [(ngModel)]="nombreInput">
+            <label for="Apellido Persona"></label>
+        <input type="text" class="form-control" name="apellido" id="apellido" aria-describedby="helpId" placeholder="apellido" [(ngModel)]="apellidoInput">
+            <label for="Edad Persona"></label>
+        <input type="number" class="form-control" name="edad" id="edad" aria-describedby="helpId" placeholder="edad" [(ngModel)]="edadInput">
+            <label class="form-check-label">
+        <input type="checkbox" class="form-check-input" name="esHombre" id="esHombre" value="checkedValue" unchecked [(ngModel)]="esHombreInput"> ¿Eres Hombre?
+            </label>
+       </div>
+      </div>
+    </div>
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <div class="list-group">
+         <app-persona *ngFor="let personaItem of personas; let i = index"
+         [persona]="personaItem"
+         [indice]="i"
+         ></app-persona>
+      </div>
+    </div>
+  </div>

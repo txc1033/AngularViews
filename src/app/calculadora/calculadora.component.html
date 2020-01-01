@@ -1,0 +1,22 @@
+<br>
+<div class="col-md-6">
+<h1>Calculadora en Angular</h1>
+<div class="form-group">
+  <label for="">Ingresa los valores</label>
+  <input type="number"
+    [(ngModel)]="valorA" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+  <small id="helpId" class="form-text text-muted">Operando A</small>
+  <input [(ngModel)]="valorB" type="number" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+  <small id="helpId" class="form-text text-muted">Operando B</small>
+  <select [(ngModel)]="operacion" name="" id="" class="form-control" value="default">
+    <option value="default" selected>Seleccione una opcion...</option>
+    <option>Sumar</option>
+    <option>Restar</option>
+    <option>Multiplicar</option>
+  </select>
+ <br>
+ <br>
+  <input (click)="Calcular()" name="sumar" id="" class="btn btn-primary" type="button" value="Calcular">
+  <div class="col-md-4"><strong>Resultado: {{resultado}}</strong></div>
+</div>
+</div>
