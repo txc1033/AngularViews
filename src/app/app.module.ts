@@ -7,10 +7,12 @@ import { PersonasComponent } from './personas/personas.component';
 import { PersonaComponent } from './personas/persona/persona.component';
 import { CalculadoraComponent } from './calculadora/calculadora.component';
 import { FormularioComponent } from './personas/formulario/formulario.component';
+import { CalinputComponent } from './calculadora/calinput/calinput.component';
+import { CaloutputComponent } from './calculadora/caloutput/caloutput.component';
 
 @NgModule({
   declarations: [
-    AppComponent, PersonasComponent, PersonaComponent, CalculadoraComponent, FormularioComponent
+    AppComponent, PersonasComponent, PersonaComponent, CalculadoraComponent, FormularioComponent, CalinputComponent, CaloutputComponent
   ],
   imports: [
     BrowserModule,
@@ -20,5 +22,4 @@ import { FormularioComponent } from './personas/formulario/formulario.component'
   bootstrap: [AppComponent]
 })
 export class AppModule {
-
 }

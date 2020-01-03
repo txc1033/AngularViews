@@ -1,0 +1,18 @@
+ <div class="row justify-content-center">
+   <div class="form-group ">
+ <small id="helpId" class="form-text text-muted">Operando A</small>
+     <input type="number" [(ngModel)]="valorA" class="form-control" name="" id="" aria-describedby="helpId"
+       placeholder="">
+    <small id="helpId" class="form-text text-muted">Operando B</small>
+     <input [(ngModel)]="valorB" type="number" class="form-control" name="" id="" aria-describedby="helpId"
+       placeholder="">
+     <label for="">Operacion</label>
+     <select [(ngModel)]="operacion" name="" id="" class="form-control">
+       <option selected>Seleccione una opcion...</option>
+       <option>Sumar</option>
+       <option>Restar</option>
+       <option>Multiplicar</option>
+     </select>
+     <br>
+     <input (click)="enviarOperacion()" name="sumar" id="" class="btn btn-primary" type="button" value="Calcular">
+

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Calculo } from './calinput/calculadora.model';
 
 @Component({
   selector: 'app-calculadora',
@@ -7,10 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalculadoraComponent implements OnInit {
 
-  valorA: number;
-  valorB: number;
   resultado = 0;
-  operacion = 'No definido';
 
   constructor() { }
 
@@ -18,25 +16,22 @@ export class CalculadoraComponent implements OnInit {
   }
 
 
-  Calcular() {
+  Calcular(calculo: Calculo) {
 
-    switch (this.operacion) {
-      case 'Sumar':
-        this.resultado = this.valorA + this.valorB;
-        break;
-      case 'Restar':
-        this.resultado = this.valorA - this.valorB;
-        break;
-      case 'Multiplicar':
-        this.resultado = this.valorA * this.valorB;
-        break;
-      default:
-        this.resultado = 0;
-        break;
-    }
-
-
-
+    switch (calculo.operacion) {
+        case 'Sumar':
+        this.resultado = calculo.valorA + calculo.valorB;
+          break;
+        case 'Restar':
+        this.resultado = calculo.valorA - calculo.valorB;
+          break;
+        case 'Multiplicar':
+          this.resultado = calculo.valorA * calculo.valorB;
+          break;
+        default:
+          this.resultado = 0;
+          break;
+      }
   }
 
 }

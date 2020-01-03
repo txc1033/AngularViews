@@ -1,7 +1,7 @@
 <br>
 <div style="text-align:center" class="col-md-12">
 <button (click)="CambiaComponente()" type="button" class="btn btn-success btn-lg">Cambiar Componente</button>
-  <ng-container -container *ngIf="contenido; else elseTemplate">
+  <ng-container -container *ngIf="contenido != true; else elseTemplate">
     <app-personas></app-personas>
   </ng-container>
   <ng-template #elseTemplate>
