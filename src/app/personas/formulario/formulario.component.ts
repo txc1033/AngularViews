@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild, ElementRef } from '@angular/core';
 import { Persona } from '../persona/persona.viewModel';
 
 @Component({
@@ -16,10 +16,10 @@ export class FormularioComponent implements OnInit {
   tituloPersona = '';
 
   // propiedades de input persona
-  nombreInput: string;
-  apellidoInput: string;
-  edadInput: number;
-  esHombreInput: boolean;
+  @ViewChild('nombreInput') nombreInput: ElementRef;
+  @ViewChild('apellidoInput') apellidoInput: ElementRef;
+  @ViewChild('edadInput') edadInput: ElementRef;
+  @ViewChild('esHombreInput') esHombreInput: ElementRef;
 
 
 
@@ -35,7 +35,7 @@ export class FormularioComponent implements OnInit {
   onModificarPersona(event: Event) {
     this.tituloPersona = '';
     this.agregarPersonaStatus = 'Esperando una accion';
-    if (this.nombreInput !== '') {
+    if (this.nombreInput.nativeElement.value !== '') {
       this.agregarPersonaStatus = 'Ingresando a: ';
       this.tituloPersona = (<HTMLInputElement>event.target).value;
     }
@@ -43,8 +43,9 @@ export class FormularioComponent implements OnInit {
   }
 
   onCrearPersona() {
-    if (this.tituloPersona !== '' && this.apellidoInput !== '' && this.edadInput > 1) {
-      const nuevaPersona = new Persona(this.nombreInput, this.apellidoInput, this.edadInput, this.esHombreInput);
+    if (this.tituloPersona !== '' && this.apellidoInput.nativeElement.value !== '' && this.edadInput.nativeElement.value > 1) {
+      // tslint:disable-next-line:max-line-length
+      const nuevaPersona = new Persona(this.nombreInput.nativeElement.value, this.apellidoInput.nativeElement.value, this.edadInput.nativeElement.value, this.esHombreInput.nativeElement.value);
       this.personaCreada.emit(nuevaPersona);
       this.agregarPersonaStatus = 'Persona Agregada';
       this.limpiaInput();
@@ -55,10 +56,10 @@ export class FormularioComponent implements OnInit {
   }
 
   limpiaInput() {
-    this.nombreInput = '';
-    this.apellidoInput = '';
-    this.edadInput = 0;
-    this.esHombreInput = false;
+    this.nombreInput.nativeElement.value = '';
+    this.apellidoInput.nativeElement.value = '';
+    this.edadInput.nativeElement.value = 0;
+    this.esHombreInput.nativeElement.value = false;
     this.tituloPersona = '';
   }
 

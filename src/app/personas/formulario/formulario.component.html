@@ -30,16 +30,16 @@
     <div class="form-horizontal">
       <label for="Nombre Persona"></label>
       <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId" placeholder="nombre"
-        (input)="onModificarPersona($event)" [(ngModel)]="nombreInput">
+        (input)="onModificarPersona($event)" #nombreInput>
       <label for="Apellido Persona"></label>
       <input type="text" class="form-control" name="apellido" id="apellido" aria-describedby="helpId"
-        placeholder="apellido" [(ngModel)]="apellidoInput">
+        placeholder="apellido" #apellidoInput>
       <label for="Edad Persona"></label>
       <input type="number" class="form-control" name="edad" id="edad" aria-describedby="helpId" placeholder="edad"
-        [(ngModel)]="edadInput">
+        #edadInput>
       <label class="form-check-label">
         <input type="checkbox" class="form-check-input" name="esHombre" id="esHombre" value="checkedValue" unchecked
-          [(ngModel)]="esHombreInput"> ¿Eres Hombre?
+          #esHombreInput> ¿Eres Hombre?
       </label>
     </div>
   </div>
