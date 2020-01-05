@@ -1,3 +1,4 @@
+import { LogginServices } from './Loggin.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -18,7 +19,7 @@ import { CaloutputComponent } from './calculadora/caloutput/caloutput.component'
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [LogginServices],
   bootstrap: [AppComponent]
 })
 export class AppModule {

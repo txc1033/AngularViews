@@ -1,7 +1,7 @@
   <app-formulario (personaCreada)="onAgregarPersona($event)"></app-formulario>
 
   <div class="row justify-content-center">
-    <div class="col-6">
+    <div class="col-md-6">
       <div class="list-group">
          <app-persona *ngFor="let personaItem of personas; let i = index"
          [persona]="personaItem"

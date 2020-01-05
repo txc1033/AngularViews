@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Calculo } from './calinput/calculadora.model';
+import { LogginServices } from '../Loggin.service';
 
 @Component({
   selector: 'app-calculadora',
@@ -10,13 +11,15 @@ export class CalculadoraComponent implements OnInit {
 
   resultado = 0;
 
-  constructor() { }
+  constructor(private login: LogginServices) { }
 
   ngOnInit() {
   }
 
 
   Calcular(calculo: Calculo) {
+
+    this.login.enviaMensajeAConsola('Realizando Operacion de ' + calculo.operacion + ' entre ' + calculo.valorA + ' y ' + calculo.valorB );
 
     switch (calculo.operacion) {
         case 'Sumar':

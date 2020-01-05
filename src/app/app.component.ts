@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   titulo = 'Componentes';
-  contenido = true;
+  contenido = false;
 
   CambiaComponente() {
     if (this.contenido) {

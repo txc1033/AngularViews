@@ -1,10 +1,12 @@
+import { LogginServices } from './../../Loggin.service';
 import { Component, OnInit, Output, EventEmitter, Input, ViewChild, ElementRef } from '@angular/core';
 import { Persona } from '../persona/persona.viewModel';
 
 @Component({
   selector: 'app-formulario',
   templateUrl: './formulario.component.html',
-  styleUrls: ['./formulario.component.css']
+  styleUrls: ['./formulario.component.css'],
+  providers: []
 })
 export class FormularioComponent implements OnInit {
   @Input() status: string;
@@ -12,7 +14,7 @@ export class FormularioComponent implements OnInit {
 
   // propiedades de control persona
   agregarPersona = false;
-  agregarPersonaStatus = 'Esperando una accion';
+  agregarPersonaStatus = this.loggin.getInicial();
   tituloPersona = '';
 
   // propiedades de input persona
@@ -24,19 +26,22 @@ export class FormularioComponent implements OnInit {
 
 
 
-  constructor() {
+  constructor(private loggin: LogginServices) {
     setTimeout(
       () => { this.agregarPersona = true; } , 3000);
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+  }
 
 
   onModificarPersona(event: Event) {
     this.tituloPersona = '';
-    this.agregarPersonaStatus = 'Esperando una accion';
+    this.agregarPersonaStatus = this.loggin.getInicial();
     if (this.nombreInput.nativeElement.value !== '') {
-      this.agregarPersonaStatus = 'Ingresando a: ';
+      this.loggin.actualizarEstado('Ingresando a: ');
+      this.agregarPersonaStatus = this.loggin.getEstado();
       this.tituloPersona = (<HTMLInputElement>event.target).value;
     }
 
@@ -47,10 +52,12 @@ export class FormularioComponent implements OnInit {
       // tslint:disable-next-line:max-line-length
       const nuevaPersona = new Persona(this.nombreInput.nativeElement.value, this.apellidoInput.nativeElement.value, this.edadInput.nativeElement.value, this.esHombreInput.nativeElement.value);
       this.personaCreada.emit(nuevaPersona);
-      this.agregarPersonaStatus = 'Persona Agregada';
+      this.agregarPersonaStatus = this.loggin.getEstado();
+
       this.limpiaInput();
     } else {
-      this.agregarPersonaStatus = 'No se a agregado una persona favor complete los campos ';
+      this.loggin.actualizarEstado('No se a agregado una persona favor complete los campos');
+      this.agregarPersonaStatus = this.loggin.getEstado();
     }
 
   }
