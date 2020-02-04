@@ -1,3 +1,4 @@
+import { AppRoutingModule } from './app-routing.module';
 import { LogginServices } from './Loggin.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -17,7 +18,8 @@ import { CaloutputComponent } from './calculadora/caloutput/caloutput.component'
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [LogginServices],
   bootstrap: [AppComponent]
