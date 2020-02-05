@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InicioComponent implements OnInit {
 
+  contenido: number;
+
   constructor() { }
 
   ngOnInit() {
+    this.contenido = 0;
   }
+
 
 }

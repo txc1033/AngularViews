@@ -1,3 +1,17 @@
-<p>
-  inicio works!
-</p>
+<h3 style="color:snow;"> Bienvenido!</h3>
+<h4 style="color:snow;">Favor seleccione un componente </h4>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <button [routerLink]="['calculadora']" type="button" class="btn btn-info btn-lg">Calculadora</button>
+    </div>
+    <div class="col">
+      <button [routerLink]="['personas']" type="button" class="btn btn-info btn-lg">Personas</button>
+    </div>
+    <div class="col">
+        <button [routerLink]="['error']" type="button" class="btn btn-danger btn-lg">Prueba error</button>
+    </div>
+  </div>
+</div>
+

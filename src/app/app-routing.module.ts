@@ -1,15 +1,19 @@
-import { ErrorComponent } from './error/error.component';
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 
 import { InicioComponent } from './inicio/inicio.component';
+import { ErrorComponent } from './error/error.component';
+
+import { PersonaComponent } from './personas/persona/persona.component';
+import { FormularioComponent } from './personas/formulario/formulario.component';
+import { PersonasComponent } from './personas/personas.component';
+
+
 import { CaloutputComponent } from './calculadora/caloutput/caloutput.component';
 import { CalinputComponent } from './calculadora/calinput/calinput.component';
-import { FormularioComponent } from './personas/formulario/formulario.component';
-import { PersonaComponent } from './personas/persona/persona.component';
 import { CalculadoraComponent } from './calculadora/calculadora.component';
-import { PersonasComponent } from './personas/personas.component';
 
 
 const routes: Routes = [
@@ -29,7 +33,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(
-      routes
+      routes, {enableTracing: true}
     )
   ],
   exports: [RouterModule]

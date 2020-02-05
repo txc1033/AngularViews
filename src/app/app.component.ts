@@ -6,14 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  titulo = 'Componentes';
-  contenido = false;
-
-  CambiaComponente() {
-    if (this.contenido) {
-      this.contenido = false;
-    } else {
-      this.contenido = true;
-    }
-  }
+  titulo = 'Gestion de Angular';
 }
