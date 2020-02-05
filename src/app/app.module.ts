@@ -11,10 +11,12 @@ import { CalculadoraComponent } from './calculadora/calculadora.component';
 import { FormularioComponent } from './personas/formulario/formulario.component';
 import { CalinputComponent } from './calculadora/calinput/calinput.component';
 import { CaloutputComponent } from './calculadora/caloutput/caloutput.component';
+import { ErrorComponent } from './error/error.component';
+import { InicioComponent } from './inicio/inicio.component';
 
 @NgModule({
   declarations: [
-    AppComponent, PersonasComponent, PersonaComponent, CalculadoraComponent, FormularioComponent, CalinputComponent, CaloutputComponent
+    AppComponent, PersonasComponent, PersonaComponent, CalculadoraComponent, FormularioComponent, CalinputComponent, CaloutputComponent, ErrorComponent, InicioComponent
   ],
   imports: [
     BrowserModule,
