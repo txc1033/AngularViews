@@ -3,7 +3,7 @@
   <div>
     <br>
       <ng-container *ngIf="indice > 2; else elseTemplate">
-         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active bg-info">
            <div class="d-flex w-100 justify-content-between">
              <h5 class="mb-1">Nueva Persona</h5>
              <small>{{indice+1}}</small>
@@ -13,7 +13,7 @@
          </a>
       </ng-container>
       <ng-template #elseTemplate>
-         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start disabled">
+         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active bg-secondary">
            <div class="d-flex w-100 justify-content-between">
              <h5 class="mb-1">Persona Base</h5>
              <small>{{indice+1}}</small>
@@ -22,6 +22,6 @@
            <small>Edad: {{persona.edad}} Sexo: {{persona.getSexo()}}</small>
          </a>
       </ng-template>
-      
-     
+
+
   </div>
