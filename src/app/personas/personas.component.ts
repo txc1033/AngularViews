@@ -24,7 +24,7 @@ export class PersonasComponent {
   }
 
   onAgregarPersona(nuevaPersona: Persona) {
-      this.personaService.onAgregarPersona(nuevaPersona);
+      this.personaService.AgregarPersona(nuevaPersona);
   }
 
 

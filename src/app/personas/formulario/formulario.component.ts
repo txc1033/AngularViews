@@ -1,6 +1,8 @@
+import { PersonaService } from './../personas.services';
 import { LogginServices } from './../../Loggin.service';
 import { Component, OnInit, Output, EventEmitter, Input, ViewChild, ElementRef } from '@angular/core';
 import { Persona } from '../persona/persona.viewModel';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-formulario',
@@ -23,16 +25,30 @@ export class FormularioComponent implements OnInit {
   @ViewChild('edadInput') edadInput: ElementRef;
   @ViewChild('esHombreInput') esHombreInput: ElementRef;
 
+  index: number;
 
 
 
-  constructor(private loggin: LogginServices) {
+  constructor(private loggin: LogginServices,
+    private router: Router,
+    private route: ActivatedRoute,
+    private personaService: PersonaService) {
     setTimeout(
       () => { this.agregarPersona = true; } , 3000);
   }
 
   ngOnInit() {
-
+   this.index = this.route.snapshot.params['id'];
+   if (this.index) {
+    const persona: Persona = this.personaService.EncontrarPersona(this.index);
+    if (persona) {
+      this.nombreInput.nativeElement.value = persona.nombre;
+      this.apellidoInput.nativeElement.value = persona.apellido;
+      this.edadInput.nativeElement.value = persona.edad;
+      this.esHombreInput.nativeElement.value = persona.esHombre;
+      this.tituloPersona = persona.nombre;
+    }
+   }
   }
 
 
