@@ -7,7 +7,7 @@ export class LogginServices {
       console.log(mensaje);
     }
 
-    actualizarEstado( mensaje: string) {
+    ActualizarEstado( mensaje: string) {
       this.estado = mensaje;
     }
 

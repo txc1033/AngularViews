@@ -18,21 +18,15 @@ import { CalculadoraComponent } from './calculadora/calculadora.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
-  { path: 'personas', component: PersonasComponent
-  /*
-  , children: [
+  { path: 'personas', component: PersonasComponent, children: [
     { path: 'lista', component: PersonaComponent },
     { path: 'agregar', component: FormularioComponent },
     { path: 'editar/:id', component: FormularioComponent },
-  ] */},
-  { path: 'personas/lista', component: PersonaComponent },
-  { path: 'personas/agregar', component: FormularioComponent },
-  { path: 'personas/editar/:id', component: FormularioComponent },
-  { path: 'calculadora', component: CalculadoraComponent
-  /*, children: [
+  ] },
+  { path: 'calculadora', component: CalculadoraComponent, children: [
     { path: 'formulario', component: CalinputComponent },
     { path: 'resultado', component: CaloutputComponent },
-  ] */},
+  ] },
   { path: '**', component: ErrorComponent }
 ];
 

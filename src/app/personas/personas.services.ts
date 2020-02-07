@@ -18,7 +18,7 @@ export class PersonaService {
     this.loggin.enviaMensajeAConsola('Enviando Persona: \n Nombre: ' + nuevaPersona.nombre + ' Apellido: ' + nuevaPersona.apellido
       + '\n Edad: ' + nuevaPersona.edad + ' Sexo: ' + nuevaPersona.getSexo());
     this.personas.push(nuevaPersona);
-    this.loggin.actualizarEstado('Persona ' + nuevaPersona.nombre + ' Agregada');
+    this.loggin.ActualizarEstado('Persona ' + nuevaPersona.nombre + ' Agregada');
   }
 
   EncontrarPersona(index: number) {

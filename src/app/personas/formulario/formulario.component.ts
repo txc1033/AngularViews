@@ -1,88 +1,99 @@
-import { PersonaService } from './../personas.services';
-import { LogginServices } from './../../Loggin.service';
-import { Component, OnInit, Output, EventEmitter, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Persona } from '../persona/persona.viewModel';
+import { LogginServices } from './../../Loggin.service';
+import { PersonaService } from './../personas.services';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-formulario',
   templateUrl: './formulario.component.html',
   styleUrls: ['./formulario.component.css'],
-  providers: []
+  providers: [PersonaService]
 })
 export class FormularioComponent implements OnInit {
-  @Input() status: string;
-  @Output() personaCreada = new EventEmitter<Persona>();
+
+
+  // propiedades de input persona
+  nombreInput: string;
+  apellidoInput: string;
+  edadInput: number;
+  esHombreInput: boolean;
+
 
   // propiedades de control persona
   agregarPersona = false;
   agregarPersonaStatus = this.loggin.getInicial();
   tituloPersona = '';
 
-  // propiedades de input persona
-  @ViewChild('nombreInput') nombreInput: ElementRef;
-  @ViewChild('apellidoInput') apellidoInput: ElementRef;
-  @ViewChild('edadInput') edadInput: ElementRef;
-  @ViewChild('esHombreInput') esHombreInput: ElementRef;
-
+  // identificador persona
   index: number;
-
-
+  modoEdicion: number;
 
   constructor(private loggin: LogginServices,
+    private personaService: PersonaService,
     private router: Router,
-    private route: ActivatedRoute,
-    private personaService: PersonaService) {
+    private route: ActivatedRoute) {
     setTimeout(
       () => { this.agregarPersona = true; } , 3000);
   }
 
   ngOnInit() {
-   this.index = this.route.snapshot.params['id'];
-   if (this.index) {
-    const persona: Persona = this.personaService.EncontrarPersona(this.index);
-    if (persona) {
-      this.nombreInput.nativeElement.value = persona.nombre;
-      this.apellidoInput.nativeElement.value = persona.apellido;
-      this.edadInput.nativeElement.value = persona.edad;
-      this.esHombreInput.nativeElement.value = persona.esHombre;
-      this.tituloPersona = persona.nombre;
+    this.index = this.route.snapshot.params['id'];
+    this.modoEdicion = +this.route.snapshot.queryParams['modoEdicion'];
+    if (this.modoEdicion != null && this.modoEdicion == 1) {
+      let persona: Persona = this.personaService.EncontrarPersona(this.index);
+      if (persona != null) {
+        //Cargamos los valores en el formulario solo si hay un index (un registro a editar)
+        this.nombreInput = persona.nombre;
+        this.apellidoInput = persona.apellido;
+        this.edadInput = persona.edad;
+        this.esHombreInput = persona.esHombre;
+      }
     }
-   }
   }
 
+  onCrearPersona() {
+    if (this.tituloPersona !== '' && this.apellidoInput !== '' && this.edadInput > 1) {
+      const nuevaPersona = new Persona(this.nombreInput, this.apellidoInput, this.edadInput, this.esHombreInput);
+        if (this.index) {
+          this.personaService.ModificarPersona(this.index, nuevaPersona);
+        } else {
+          this.personaService.AgregarPersona(nuevaPersona);
+        }
+      this.agregarPersonaStatus = this.loggin.getEstado();
+      this.LimpiaInput();
+      this.router.navigate(['personas']);
+    } else {
+      this.loggin.ActualizarEstado('No se a agregado una persona favor complete los campos');
+      this.agregarPersonaStatus = this.loggin.getEstado();
+      return;
+    }
 
-  onModificarPersona(event: Event) {
+  }
+
+  onModificarPersonaFormulario(event: Event) {
     this.tituloPersona = '';
     this.agregarPersonaStatus = this.loggin.getInicial();
-    if (this.nombreInput.nativeElement.value !== '') {
-      this.loggin.actualizarEstado('Ingresando a: ');
+    if (this.nombreInput !== '') {
+      this.loggin.ActualizarEstado('Ingresando a: ');
       this.agregarPersonaStatus = this.loggin.getEstado();
       this.tituloPersona = (<HTMLInputElement>event.target).value;
     }
 
   }
 
-  onCrearPersona() {
-    if (this.tituloPersona !== '' && this.apellidoInput.nativeElement.value !== '' && this.edadInput.nativeElement.value > 1) {
-      // tslint:disable-next-line:max-line-length
-      const nuevaPersona = new Persona(this.nombreInput.nativeElement.value, this.apellidoInput.nativeElement.value, this.edadInput.nativeElement.value, this.esHombreInput.nativeElement.value);
-      this.personaCreada.emit(nuevaPersona);
-      this.agregarPersonaStatus = this.loggin.getEstado();
-
-      this.limpiaInput();
-    } else {
-      this.loggin.actualizarEstado('No se a agregado una persona favor complete los campos');
-      this.agregarPersonaStatus = this.loggin.getEstado();
+  onEliminarPersona() {
+    if (this.index != null) {
+      this.personaService.EliminarPersona(this.index)
     }
-
+    this.router.navigate(['personas']);
   }
 
-  limpiaInput() {
-    this.nombreInput.nativeElement.value = '';
-    this.apellidoInput.nativeElement.value = '';
-    this.edadInput.nativeElement.value = 0;
-    this.esHombreInput.nativeElement.value = false;
+  LimpiaInput() {
+    this.nombreInput = '';
+    this.apellidoInput = '';
+    this.edadInput = 0;
+    this.esHombreInput = false;
     this.tituloPersona = '';
   }
 

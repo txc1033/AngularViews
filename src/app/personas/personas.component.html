@@ -1,11 +1,17 @@
-  <app-formulario (personaCreada)="onAgregarPersona($event)"></app-formulario>
+<br>
+
+<button class="btn btn-info btn-lg" style="cursor: pointer" (click)="irAgregar()">Formulario Persona</button>
+
+<router-outlet></router-outlet>
 
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="list-group">
-         <app-persona *ngFor="let personaItem of personas; let i = index"
-         [persona]="personaItem"
-         [indice]="i"></app-persona>
+         <app-persona *ngFor="let personaElemento of personas; let i = index"
+                      [persona]="personaElemento"
+                      [indice]="i">
+          </app-persona>
       </div>
     </div>
   </div>
+

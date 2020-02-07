@@ -1,31 +1,29 @@
 import { PersonaService } from './personas.services';
-import { Component, inject, EventEmitter, Output, Input } from '@angular/core';
-import { PersonaComponent } from './persona/persona.component';
+import { Component, OnInit } from '@angular/core';
 import { Persona, } from './persona/persona.viewModel';
-import { stringify } from 'querystring';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-personas',
   templateUrl: './personas.component.html',
-  styleUrls: ['./personas.component.css'],
-  providers: [PersonaComponent, PersonaService]
+  styleUrls: ['./personas.component.css']
 })
-export class PersonasComponent {
+export class PersonasComponent implements OnInit {
 
-  // tslint:disable-next-line: max-line-length
   personas: Persona[] = [];
 
 
-  constructor(private personaService: PersonaService) {}
+  constructor(
+    private personaService: PersonaService,
+    private router: Router
+  ) { }
 
-  // tslint:disable-next-line:use-life-cycle-interface
   ngOnInit(): void {
-     this.personas = this.personaService.personas;
+    this.personas = this.personaService.personas;
   }
 
-  onAgregarPersona(nuevaPersona: Persona) {
-      this.personaService.AgregarPersona(nuevaPersona);
+  irAgregar() {
+    this.router.navigate(['./personas/agregar'], { queryParams: { modoEdicion: 0 } });
   }
-
 
 }
